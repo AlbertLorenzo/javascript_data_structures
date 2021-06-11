@@ -1,29 +1,4 @@
-class treeNode {
-    constructor(key) {
-        this.key = key;
-        this.left = this.right = null;
-    }
-
-    getKey() {
-        return this.key;
-    }
-
-    getLeftChild() {
-        return this.left;
-    }
-
-    getRightChild() {
-        return this.right;
-    }
-
-    setRightChild(node) {
-        this.right = node;
-    }
-
-    setLeftChild(node) {
-        this.left = node;
-    }
-}
+import { treeNode } from './tree_node.js';
 
 class binarySearchTree {
     constructor() {
@@ -107,10 +82,14 @@ class binarySearchTree {
     postorderTraversal() { this.#postorder(this.root) }
 }
 
-const tree = new binarySearchTree();
+function main() {
+    const tree = new binarySearchTree();
 
-tree.insert(5);
-tree.insert(2);
-tree.insert(6);
+    tree.insert(5);
+    tree.insert(2);
+    tree.insert(6);
 
-console.log(tree.search(6));
+    console.log(tree.search(6));
+}
+
+main();
