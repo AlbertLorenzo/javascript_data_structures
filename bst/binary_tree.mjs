@@ -1,6 +1,6 @@
-import { treeNode } from 'tree_node';
+import { treeNode } from './tree_node.mjs';
 
-class binarySearchTree {
+export class binarySearchTree {
     constructor() {
         this.root = null;
     }
@@ -50,7 +50,52 @@ class binarySearchTree {
     }
 
     delete(key) {
+        let parent = null, current = this.root;
 
+        while (current != null && current.getKey() != key) {
+            parent = current;
+            current = (key < current.getKey()) ? current.getLeftChild() : current.getRightChild();
+        }
+
+        if (current == null) {
+            return false;
+        }
+
+        if (current.getRightChild() == null && current.getLeftChild() == null) {
+            console.log(current);
+            console.log(parent);
+            if (parent != null) {
+                if (parent.getLeftChild().getKey() == current.getKey()) {
+                    parent.setRightChild(null);
+                } else {
+                    parent.setLeftChild(null);
+                }
+            } else {
+                this.root = null;
+            }
+            return true;
+        }
+
+        // TODO        
+    }
+
+    #levelorder() {
+        let node;
+        let queue = new Array();
+        queue.push(this.root);
+
+        while (queue.length != 0) {
+            node = queue.shift();
+            console.log(node.getKey());
+
+            if (node.getLeftChild() != null) {
+                queue.push(node.getLeftChild());
+            }
+
+            if (node.getRightChild() != null) {
+                queue.push(node.getRightChild());
+            }
+        }
     }
 
     #inorder(node) {
@@ -80,16 +125,5 @@ class binarySearchTree {
     inorderTraversal() { this.#inorder(this.root) }
     preorderTraversal() { this.#preorder(this.root) }
     postorderTraversal() { this.#postorder(this.root) }
+    levelOrderTraversal() { this.#levelorder() }
 }
-
-function main() {
-    const tree = new binarySearchTree();
-
-    tree.insert(5);
-    tree.insert(2);
-    tree.insert(6);
-
-    console.log(tree.search(6));
-}
-
-main(); 
