@@ -4,6 +4,11 @@ export class treeNode {
         this.left = this.right = null;
     }
 
+    isLeaf() {
+        return (this.left == null && this.right == null);
+    }
+
+
     getKey() {
         return this.key;
     }

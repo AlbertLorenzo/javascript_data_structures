@@ -9,7 +9,7 @@ export class binarySearchTree {
         return this.root;
     }
 
-    isEmpty() {
+    isEmpty() { 
         return this.root == null;
     }
 
@@ -77,6 +77,36 @@ export class binarySearchTree {
         }
 
         // TODO        
+        
+
+
+    }
+
+    externalPower() {
+        let sum = 0, level = 0, node, queue = new Array();
+        queue.push(this.root);
+
+        while (queue.length != 0) {
+            let count = queue.length;
+            while (count > 0) {
+                node = queue.shift();
+
+                if (node.isLeaf()) {
+                    sum += 2**level;
+                }
+
+                if (node.getLeftChild()) {
+                    queue.push(node.getLeftChild());
+                }
+
+                if (node.getRightChild()) {
+                    queue.push(node.getRightChild())
+                }
+                count--;
+            }
+            level++;
+        }
+        console.log(`Suma potencia externa: ${sum}`);
     }
 
     #levelorder() {
